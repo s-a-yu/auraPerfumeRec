@@ -1,0 +1,16 @@
+{
+  "name": "aura-perfume-recommendation",
+  "version": "1.0.0",
+  "description": "AI-powered fragrance recommendation system",
+  "scripts": {
+    "start": "./start_all.sh",
+    "stop": "./stop_all.sh",
+    "logs": "tail -f logs/*.log",
+    "backend": "cd backend && node index.js",
+    "frontend": "cd my-app && npm start",
+    "recsystem": "cd recSystem && source venv/bin/activate && python app.py"
+  },
+  "keywords": ["perfume", "fragrance", "recommendation", "ai"],
+  "author": "",
+  "license": "ISC"
+}

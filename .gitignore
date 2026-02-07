@@ -1,0 +1,42 @@
+node_modules
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environments
+.env
+.venv
+venv/
+env/
+korys-env/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Unit test / coverage reports
+.coverage
+*.py,cover
+htmlcov/
+.tox/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Compiled documentation
+docs/_build/
+
+recSystem/.DS_Store
+.DS_Store
+
+# Logs
+logs/
+*.pid

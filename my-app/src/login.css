@@ -1,0 +1,79 @@
+
+h2{
+    font-size: 2.5rem;
+    margin:6rem 0 4rem;
+    text-align: center;
+}
+form {
+    margin: 1rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Input container */
+.form_control {
+    margin-bottom: 1.5rem;  
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline:none;
+}
+
+input[type="email"], input[type="password"]{
+    color:black;
+}
+
+
+input:focus {
+    border-color: #13453D;
+    box-shadow: 0 0 5px rgba(19, 69, 61, 0.5);
+}
+
+/* Button styling */
+.btn-submit {
+    display: inline-block;
+    width: 100%;
+    background-color: #13453D;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    color:white;
+    background-color:#518279;
+    border:solid 0.5px black;
+}
+
+/* Link styling */
+form a {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    color: #13453D;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
