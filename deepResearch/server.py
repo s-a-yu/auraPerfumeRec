@@ -1,12 +1,11 @@
 """
-Deep Research Server - FastMCP-style background tasks for perfume recommendations.
+Deep Research Server ~~~~ FastMCP-style background tasks for perfume recommendations.
 
 This server provides REST endpoints for:
 - Starting deep research tasks
 - Polling task status
 - Getting results
 
-Uses Gemini for AI-powered web research.
 """
 
 import asyncio
@@ -18,7 +17,6 @@ from contextlib import asynccontextmanager
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import HOST, PORT, validate_config, LLM_PROVIDER
@@ -28,14 +26,12 @@ from agents.planner import PlannerAgent
 from agents.searcher import SearcherAgent
 from agents.analyzer import AnalyzerAgent
 
-# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
-# Initialize task manager (in-memory)
+
 task_manager = TaskManager()
 
-# Background task tracking
 _background_tasks = {}
 
 
@@ -49,7 +45,7 @@ def run_async(coro):
     try:
         return loop.run_until_complete(coro)
     finally:
-        # Properly shutdown async generators and pending tasks
+        # properly shutdown async generators and pending tasks
         try:
             loop.run_until_complete(loop.shutdown_asyncgens())
         except Exception:
@@ -109,12 +105,12 @@ def start_background_task(task_id: str, notes: list, preferences: str):
     import threading
 
     def run_in_thread():
-        # Create a new event loop for this thread
+        # create new event loop for thread
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
         try:
-            # Run the entire pipeline in this loop
+            # Run entire pipeline in this loop
             loop.run_until_complete(run_research_pipeline(task_id, notes, preferences))
         except Exception as e:
             print(f"Background task error: {e}")
@@ -124,9 +120,9 @@ def start_background_task(task_id: str, notes: list, preferences: str):
             except Exception:
                 pass
         finally:
-            # Properly cleanup the loop
+            # Properly cleanup loop
             try:
-                # Cancel any pending tasks
+                # Cancel pending tasks
                 pending = asyncio.all_tasks(loop)
                 for task in pending:
                     task.cancel()
@@ -162,13 +158,9 @@ def start_research():
         if not notes or not isinstance(notes, list):
             return jsonify({"error": "notes array is required"}), 400
 
-        # Generate task ID
         task_id = str(uuid.uuid4())
-
-        # Create task entry
         run_async(task_manager.create_task(task_id, notes, preferences))
 
-        # Start background research
         start_background_task(task_id, notes, preferences)
 
         return jsonify({
@@ -190,7 +182,6 @@ def get_status(task_id):
         if not result:
             return jsonify({"error": "Task not found"}), 404
 
-        # Convert to dict, handling Pydantic model
         response = {
             "task_id": result.task_id,
             "status": result.status.value,
@@ -199,7 +190,6 @@ def get_status(task_id):
             "error": result.error,
         }
 
-        # Include recommendations if completed
         if result.recommendations:
             response["recommendations"] = [
                 {
@@ -237,7 +227,6 @@ if __name__ == '__main__':
     print("Deep Research Server")
     print("=" * 60)
 
-    # Validate configuration
     try:
         validate_config()
         print(f"Using provider: {LLM_PROVIDER}")

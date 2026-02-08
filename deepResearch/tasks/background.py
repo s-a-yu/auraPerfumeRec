@@ -111,7 +111,6 @@ class TaskManager:
 
     def cleanup_old_tasks(self, max_age_hours: int = 24) -> int:
         """Remove tasks older than max_age_hours. Returns count of removed tasks."""
-        # Simple cleanup - in production, use Redis with TTL
         now = datetime.utcnow()
         to_remove = []
 

@@ -25,13 +25,12 @@ def recommend():
         if not input_notes:
             return jsonify({"error": "Missing 'notes' parameter"}), 400
 
-        # transform the input notes into a feature vector
         input_vector = vectorizer.transform([input_notes])
 
         # similarity scores between the input and all perfumes
         similarity_scores = cosine_similarity(input_vector, feature_vectors)
 
-        n = int(request.args.get('n', 5))  # Default to 5 recommendations
+        n = int(request.args.get('n', 5))  # default is 5 recommendations
         similar_indices = similarity_scores[0].argsort()[-n:][::-1]
 
         # get details of similar perfumes

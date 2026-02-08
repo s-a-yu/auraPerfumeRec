@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDeepResearch } from '../hooks/useDeepResearch';
 
-// Define the list of available notes for selection with colors
+
 const notesOptions = [
     { value: 'vanilla', label: 'Vanilla', emoji: '🌸', color: '#f9e4d4' },
     { value: 'musk', label: 'Musk', emoji: '🦌', color: '#d4b5a0' },
@@ -52,11 +52,9 @@ function RecSystem() {
     const [recommendations, setRecommendations] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Deep research state
     const [isDeepResearch, setIsDeepResearch] = useState(false);
     const [additionalPreferences, setAdditionalPreferences] = useState('');
 
-    // Deep research hook
     const {
         startResearch,
         cancelResearch,
@@ -68,10 +66,9 @@ function RecSystem() {
         error: deepError
     } = useDeepResearch();
 
-    // Combined loading state
+
     const isAnyLoading = loading || deepLoading;
 
-    // Update recommendations when deep research completes
     useEffect(() => {
         if (deepRecommendations.length > 0) {
             setRecommendations(deepRecommendations);
@@ -100,7 +97,7 @@ function RecSystem() {
         }
 
         if (isDeepResearch) {
-            // Use deep research
+            // use deep research
             const noteValues = selectedNotes.map(note => note.value);
             startResearch(noteValues, additionalPreferences);
         } else {
@@ -127,7 +124,7 @@ function RecSystem() {
         }
     };
 
-    // Get button text based on state
+    // get button text based on state
     const getButtonText = () => {
         if (loading) return 'Finding Perfect Matches...';
         if (deepLoading) return deepMessage || 'Researching...';

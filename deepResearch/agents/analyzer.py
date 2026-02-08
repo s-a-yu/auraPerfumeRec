@@ -1,5 +1,3 @@
-"""Analyzer Agent - Synthesizes search results into recommendations using pydantic_ai."""
-
 import os
 from typing import List, Optional
 from pydantic import BaseModel, Field
@@ -10,7 +8,7 @@ from config import get_model_config
 
 
 class RecommendationOutput(BaseModel):
-    """A single perfume recommendation."""
+    """single perfume recommendation."""
     Name: str = Field(..., description="The exact perfume name (e.g., 'Bleu de Chanel')")
     Brand: str = Field(..., description="The brand/house name (e.g., 'Chanel')")
     Notes: str = Field(..., description="Key fragrance notes, comma-separated")
@@ -18,7 +16,7 @@ class RecommendationOutput(BaseModel):
 
 
 class AnalysisOutput(BaseModel):
-    """Structured output for the analyzer agent."""
+    """Structured output for analyzer agent."""
     recommendations: List[RecommendationOutput] = Field(
         default_factory=list,
         description="List of 3-5 perfume recommendations",
@@ -93,7 +91,7 @@ Based on this research, recommend 3-5 specific perfumes that match."""
                 for rec in analysis.recommendations
             ]
 
-            # If empty, provide a fallback
+            # if empty, give a fallback
             if not recommendations:
                 return self._get_fallback_recommendations(notes)
 
@@ -123,7 +121,7 @@ Based on this research, recommend 3-5 specific perfumes that match."""
             "floral": ("Miss Dior", "Dior", "rose, peony, lily of the valley"),
         }
 
-        # Find matching fallback
+        # find matching fallback
         for note in notes:
             note_lower = note.lower()
             for key, (name, brand, note_list) in fallbacks.items():

@@ -7,7 +7,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 
-const POLL_INTERVAL = 2000; // Poll every 2 seconds
+const POLL_INTERVAL = 2000; // poll every 2s
 const API_BASE = 'http://localhost:8080/api/research';
 
 export const useDeepResearch = () => {
@@ -137,7 +137,7 @@ export const useDeepResearch = () => {
         setIsLoading(false);
     }, []);
 
-    // Cleanup on unmount
+    // cleanup
     useEffect(() => {
         return () => {
             if (pollRef.current) {
@@ -147,11 +147,11 @@ export const useDeepResearch = () => {
     }, []);
 
     return {
-        // Actions
+
         startResearch,
         cancelResearch,
         reset,
-        // State
+
         taskId,
         isLoading,
         status,
